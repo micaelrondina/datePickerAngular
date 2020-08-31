@@ -1,0 +1,29 @@
+<edi-filtro-liq-teste 
+[props]="state" 
+[shouldAllowInteraction]="shouldAllowInteraction()"
+(didTouchApplyButton)="didTouchApplyButton($event)"
+(didTouchClearButton)="didTouchClearButton()" >
+</edi-filtro-liq-teste>
+
+<edi-dark-overlay *ngIf="shouldShowEntityList">
+  <div style="width:600px">
+    <edi-circularization-entity-list
+      [entities]="commerceList"
+      (didTouchConfirmEntitySelection)="didTouchConfirmEntitySelectionButton($event)"
+      (didTouchCancelEntitySelection)="didTouchCancelEntitySelectionButton()">
+    </edi-circularization-entity-list>
+  </div>
+</edi-dark-overlay>
+
+
+<div class="edi-section">
+  <edi-liq-table-test ></edi-liq-table-test>
+    <div class="edi-section-gap-small"></div>  
+     <div class="edi-button-panel">
+       <edi-button (ediButtonPressed)="exportXLSX()"
+         [type]="'PRIMARY'" [disabled]="!shouldAllowInteractionXLSX()" >
+          <span>Gerar Excel</span>
+        </edi-button>
+      </div>
+
+</div>

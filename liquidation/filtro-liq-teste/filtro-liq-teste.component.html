@@ -1,0 +1,132 @@
+<div class="edi-section">
+
+  <edi-section-header [showStatusBox]="false" [title]="'Filtros'">
+  </edi-section-header>
+
+
+    <div class="edi-gap-left-x8 edi-gap-right-x8 edi-ngap">
+      <div class="edi-box-flex-x3">
+        <div class="edi-input-container  edi-igap-x8 edi-block-box">  
+          <span class="edi-small-label">ID de referência do Adquirente</span>               
+          <input 
+            type="text" 
+            placeholder="Id do Adquirente" 
+            [disabled]="true"
+            [value]="acquirerID"
+          >
+        </div> 
+      </div>
+
+       <div class="edi-box-flex-x3">
+        <div class="edi-input-container edi-igap-x8 edi-block-box">
+          <span class="edi-small-label">Nome do Adquirente</span>                
+          <div class="edi-input">
+            <input 
+              type="text" 
+              placeholder="Nome do Adquirente"
+              matInput 
+              [disabled]="true"
+              [value]="acquirerDisplayName" 
+          >
+          </div>
+        </div>
+      </div>
+
+   
+      <div class="edi-box-flex-x3">
+        <div class="edi-input-container  edi-igap-x8 edi-block-box">
+          <span class="edi-small-label">Data de Inicio</span>
+          <input matInput [matDatepicker]="datePickerInicio" placeholder="Selecione a data de inicio"
+          [disabled]="!shouldAllowInteraction()"
+          [value]="dataInicio"
+          (click)="datePickerInicio.open()"
+          (focus)="datePickerInicio.open()"
+          (keydown)="datePickerInicio.open()"
+          (dateChange)="didChangeDataInicio($event.value)">
+          <mat-datepicker #datePickerInicio></mat-datepicker>
+        </div>
+      </div>
+
+      <div class="edi-box-flex-x3">
+        <div class="edi-input-container  edi-igap-x8 edi-block-box">
+          <span class="edi-small-label">Data Final</span>
+          <input matInput [matDatepicker]="datePickerFim" placeholder="Selecione a data final"
+          [min]="requestDateToMin"
+          [max]="requestDateToMax"
+          [disabled]="!shouldAllowInteraction()"
+          [value]="dataFim"
+          (click)="datePickerFim.open()"
+          (focus)="datePickerFim.open()"
+          (keydown)="datePickerFim.open()"
+          (dateChange)="didChangeDataFim($event.value)">
+          <mat-datepicker #datePickerFim></mat-datepicker>
+        </div>
+      </div>
+
+    <div class="edi-box-flex-x3">
+      <div class="edi-input-container  edi-igap-x8 edi-block-box">   
+        <span class="edi-small-label">ID de referência Comércio</span>  
+        <input 
+          type="text" 
+          placeholder="Digite o id de referência do comércio" 
+          [disabled]="!shouldAllowInteraction()"
+          [value]="commerceID" 
+          (input)="didChangeCommerceID($event.target.value)">
+      </div>
+    </div> 
+
+    <div class="edi-box-flex-x3">
+      <div class="edi-input-container  edi-igap-x8 edi-block-box">
+        <span class="edi-small-label">Nome do Comércio</span>
+        <input 
+          type="text" 
+          placeholder="Digite o nome do comércio"
+          matInput 
+          [disabled]="!shouldAllowInteraction()"
+          [value]="commerceDisplayName" 
+          (input)="didChangeCommerceDisplayName($event.target.value)">
+      </div> 
+    </div>
+
+    <div class="edi-box-flex-x3">
+      <div class="edi-input-container  edi-igap-x8 edi-block-box">
+        <span class="edi-small-label">Documento</span>
+        <input 
+          type="text" 
+          placeholder="Digite o CPF/CNPJ do comércio"
+          matInput 
+          [disabled]="!shouldAllowInteraction()"
+          [value]="commerceDocumentID" 
+          (input)="didChangeDocumentID($event.target.value)">
+      </div>
+    </div>
+
+    <edi-status-box 
+      *ngIf="shouldShowLoading" 
+      style="text-align: right"
+      class="edi-txt-heading-sub edi-color-content-dark-primary edi-igap-x8"          
+      [type]="'LOADING'" 
+      [tip]="statusBoxTip">
+    </edi-status-box>
+
+    <div *ngIf="!shouldShowLoading" class="edi-button-panel edi-igap-right-x8 edi-igap-top-x8">
+      <edi-button 
+        [disabled]="!shouldAllowInteraction()" 
+        (ediButtonPressed)="didTouchClearButton()" 
+        [type]="'NEUTRAL'"
+      >
+        <span>Limpar</span>
+      </edi-button>          
+      <edi-button 
+        [disabled]="!shouldAllowInteraction()"  
+        (ediButtonPressed)="didTouchApplyButton()" 
+        [type]="'PRIMARY'"
+      >
+        <span>Filtrar</span>
+      </edi-button>   
+    </div>
+
+
+    </div>
+ 
+</div>
